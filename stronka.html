@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barnas Media</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: #f7f7f8;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-dark {
+      color: #0f172a;
+    }
+
+    .logo-accent {
+      color: #f45d01;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      font-weight: 800;
+      transition: 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #f45d01;
+      color: white;
+      box-shadow: 0 10px 24px rgba(244, 93, 1, 0.22);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #0f172a;
+      border: 2px solid #e2e8f0;
+    }
+
+    .btn-top {
+      padding: 16px 28px;
+      font-size: 18px;
+    }
+
+    .hero {
+      padding: 64px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      background: #fde8d2;
+      color: #c24b06;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      font-size: clamp(52px, 7vw, 78px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin-top: 30px;
+      font-size: 30px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .hero-actions .btn {
+      min-height: 70px;
+      padding: 18px 30px;
+      font-size: 26px;
+    }
+
+    .hero-card-wrap {
+      background: #ff6a00;
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: 0 30px 60px rgba(244, 93, 1, 0.2);
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px;
+    }
+
+    .hero-card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .hero-card-item + .hero-card-item {
+      margin-top: 28px;
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .green { background: #dcfce7; color: #15803d; }
+    .blue { background: #dbeafe; color: #1d4ed8; }
+    .purple { background: #f3e8ff; color: #7e22ce; }
+
+    .hero-card-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .hero-card-desc {
+      margin-top: 2px;
+      font-size: 24px;
+      color: #64748b;
+    }
+
+    .section-light {
+      border-top: 1px solid #e2e8f0;
+      background: #fafafa;
+      padding: 96px 0;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      margin: 18px auto 0;
+      text-align: center;
+      font-size: 30px;
+      color: #475569;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 60px;
+    }
+
+    .step-card,
+    .feature-card,
+    .about-card,
+    .cta-card {
+      border-radius: 28px;
+    }
+
+    .step-card {
+      border: 1px solid;
+      padding: 34px;
+    }
+
+    .step-1 { border-color: #fed7aa; background: rgba(255, 237, 213, 0.5); }
+    .step-2 { border-color: #bfdbfe; background: rgba(219, 234, 254, 0.4); }
+    .step-3 { border-color: #bbf7d0; background: rgba(220, 252, 231, 0.4); }
+    .step-4 { border-color: #e9d5ff; background: rgba(243, 232, 255, 0.4); }
+
+    .step-number {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .step-card h3 {
+      margin-top: 28px;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .step-card p {
+      margin-top: 18px;
+      font-size: 26px;
+      line-height: 1.55;
+      color: #475569;
+    }
+
+    .orange-bg { background: #f97316; }
+    .blue-bg { background: #2563eb; }
+    .green-bg { background: #16a34a; }
+    .purple-bg { background: #9333ea; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 60px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      font-weight: 800;
+      color: #eb5a0c;
+      line-height: 1;
+    }
+
+    .feature-card h3 {
+      margin-top: 24px;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .feature-card p {
+      margin-top: 14px;
+      font-size: 24px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .about-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .about-card {
+      margin-top: 42px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 42px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .about-card p {
+      font-size: 28px;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    .about-card p + p {
+      margin-top: 26px;
+    }
+
+    .about-card strong {
+      color: #0f172a;
+    }
+
+    .cta-section {
+      margin-top: 24px;
+      background: linear-gradient(135deg, #ef5a0c 0%, #d94d08 100%);
+      padding: 96px 0;
+    }
+
+    .cta-section .section-title,
+    .cta-section .section-subtitle {
+      color: white;
+    }
+
+    .cta-section .section-subtitle {
+      color: #fed7aa;
+      max-width: 900px;
+    }
+
+    .cta-card {
+      max-width: 960px;
+      margin: 56px auto 0;
+      background: white;
+      padding: 44px;
+      text-align: center;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.16);
+    }
+
+    .cta-card h3 {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .cta-card p {
+      margin-top: 20px;
+      font-size: 28px;
+      line-height: 1.6;
+      color: #475569;
+    }
+
+    .cta-card .btn {
+      margin-top: 30px;
+      min-height: 76px;
+      padding: 18px 34px;
+      font-size: 28px;
+    }
+
+    .cta-link {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #64748b;
+      word-break: break-all;
+    }
+
+    .footer {
+      background: #071733;
+      color: white;
+      text-align: center;
+      padding: 64px 0;
+    }
+
+    .footer-sub {
+      margin-top: 24px;
+      font-size: 28px;
+      color: #cbd5e1;
+    }
+
+    .footer-contact {
+      margin-top: 28px;
+      display: grid;
+      gap: 10px;
+      font-size: 24px;
+      color: #cbd5e1;
+    }
+
+    .footer-copy {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .steps-grid,
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 32px, 1200px);
+      }
+
+      .header-inner,
+      .hero-grid,
+      .steps-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+
+      .badge {
+        font-size: 16px;
+        padding: 10px 16px;
+      }
+
+      .hero p,
+      .section-subtitle,
+      .step-card p,
+      .feature-card p,
+      .about-card p,
+      .cta-card p,
+      .footer-sub,
+      .footer-contact {
+        font-size: 20px;
+      }
+
+      .hero-actions .btn,
+      .cta-card .btn {
+        width: 100%;
+        font-size: 22px;
+      }
+
+      .hero-card-title,
+      .feature-card h3,
+      .step-card h3,
+      .cta-card h3 {
+        font-size: 28px;
+      }
+
+      .hero-card-desc {
+        font-size: 20px;
+      }
+
+      .section,
+      .section-light,
+      .cta-section {
+        padding: 72px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-dark">Barnas </span><span class="logo-accent">Media</span>
+      </div>
+      <a class="btn btn-primary btn-top" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">
+        Umów konsultację
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">Dla Studiów Treningu Personalnego</div>
+        <h1>15 nowych klientów w 60 dni</h1>
+        <p>
+          Pomagamy studiom treningu personalnego zdobyć 15+ nowych klientów w 60 dni. Finansujemy kampanie Meta, wdrażamy bezpłatnie CRM i porządkujemy cały proces kontaktu z leadami, żeby kończył się podpisaną umową, a nie przepalonym budżetem.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#jak-to-dziala">Zobacz jak to działa</a>
+          <a class="btn btn-secondary" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">
+            Bezpłatna konsultacja
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="hero-card-item">
+            <div class="icon-box green">✓</div>
+            <div>
+              <div class="hero-card-title">15+ nowych klientów</div>
+              <div class="hero-card-desc">Gwarantowany rezultat w 60 dni</div>
+            </div>
+          </div>
+
+          <div class="hero-card-item">
+            <div class="icon-box blue">⚡</div>
+            <div>
+              <div class="hero-card-title">Finansujemy kampanie</div>
+              <div class="hero-card-desc">Bierzemy większe ryzyko na siebie</div>
+            </div>
+          </div>
+
+          <div class="hero-card-item">
+            <div class="icon-box purple">▥</div>
+            <div>
+              <div class="hero-card-title">CRM + System zarządzania</div>
+              <div class="hero-card-desc">Wdrożenie całkowicie bezpłatne</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jak-to-dziala" class="section-light">
+    <div class="container">
+      <h2 class="section-title">Jak to działa?</h2>
+      <p class="section-subtitle">Nie sprzedajemy samych reklam. Budujemy cały mechanizm pozyskiwania i domykania klientów.</p>
+
+      <div class="steps-grid">
+        <div class="step-card step-1">
+          <div class="step-number orange-bg">1</div>
+          <h3>Kampanie Meta</h3>
+          <p>Uruchamiamy kampanie Meta nastawione na realny wynik. Nie chodzi o zasięgi i puste formularze, tylko o leady, które da się zamknąć sprzedażowo.</p>
+        </div>
+
+        <div class="step-card step-2">
+          <div class="step-number blue-bg">2</div>
+          <h3>System CRM</h3>
+          <p>Wdrażamy bezpłatnie CRM i porządkujemy obsługę leadów, żeby żadna szansa sprzedażowa nie ginęła po pierwszej wiadomości albo nieodebranym telefonie.</p>
+        </div>
+
+        <div class="step-card step-3">
+          <div class="step-number green-bg">3</div>
+          <h3>Follow-up</h3>
+          <p>Układamy follow-up, skrypty kontaktu i logikę działania, żeby zwiększyć liczbę osób, które faktycznie przychodzą, rozmawiają i kupują.</p>
+        </div>
+
+        <div class="step-card step-4">
+          <div class="step-number purple-bg">4</div>
+          <h3>Rezultaty</h3>
+          <p>Celem współpracy nie są raporty i ładne tabelki. Celem jest wzrost liczby klientów i realny wynik biznesowy w ciągu 60 dni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="container about-wrap">
+      <h2 class="section-title">Dla kogo to jest?</h2>
+      <p class="section-subtitle">Ta współpraca ma sens tylko wtedy, gdy studio naprawdę chce rosnąć, a nie tylko "spróbować reklam".</p>
+
+      <div class="about-card">
+        <img src="https://img.sanishtech.com/u/9defdf9b966190eff0208dd4fe1d4855.png" alt="Karol Barnaś" style="width: 180px; height: 180px; object-fit: cover; border-radius: 999px; display: block; margin: 0 auto 28px; box-shadow: 0 10px 30px rgba(15,23,42,0.12);" />
+        <p><strong>To jest dla Ciebie, jeśli:</strong></p>
+        <p>— prowadzisz studio treningu personalnego i chcesz regularnie pozyskiwać nowych klientów, a nie działać z doskoku,</p>
+        <p>— miałeś już reklamy, ale leady były słabe albo nikt ich sensownie nie domykał,</p>
+        <p>— chcesz mieć porządek w kontakcie z leadami, zamiast chaosu na Messengerze, telefonie i kartkach,</p>
+        <p>— zależy Ci na wyniku biznesowym, a nie na samej obecności w social mediach.</p>
+        <p><strong>To nie jest dla Ciebie, jeśli:</strong></p>
+        <p>— liczysz, że same reklamy naprawią słabą ofertę i brak sprzedaży,</p>
+        <p>— nie odbierasz telefonów, nie odpisujesz leadom i nie chcesz wdrożyć procesu,</p>
+        <p>— szukasz najtańszej usługi, a nie modelu, który ma dowieźć wynik.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 28px; padding: 44px 36px; text-align: center; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);">
+        <p style="font-size: 18px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 800; color: #f45d01;">Zaufali mi</p>
+        <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; align-items: stretch;">
+          <a href="https://gym-center.pl/" target="_blank" rel="noreferrer" style="display:flex; align-items:center; justify-content:center; min-height:150px; padding:24px; background:#fff; border-radius:24px; border:1px solid #e2e8f0;">
+            <img src="https://img.sanishtech.com/u/d95ea7e28f1769866a38944861ebfd95.png" alt="Gym Center" style="max-width: 220px; max-height: 100px; width: auto; height: auto; object-fit: contain;" />
+          </a>
+          <a href="https://www.strefaruchuprzemysl.com/" target="_blank" rel="noreferrer" style="display:flex; align-items:center; justify-content:center; min-height:150px; padding:24px; background:#fff; border-radius:24px; border:1px solid #e2e8f0;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0P2LW2lPv2XLm8pSalUc8NaBOJUJGLTsSeA&s" alt="Strefa Ruchu" style="max-width: 220px; max-height: 100px; width: auto; height: auto; object-fit: contain;" />
+          </a>
+          <a href="https://www.akademiaruchu-krakow.com.pl/" target="_blank" rel="noreferrer" style="display:flex; align-items:center; justify-content:center; min-height:150px; padding:24px; background:#fff; border-radius:24px; border:1px solid #e2e8f0;">
+            <img src="https://akademiaruchu-krakow.com.pl/Logo.svg" alt="Akademia Ruchu" style="max-width: 220px; max-height: 100px; width: auto; height: auto; object-fit: contain;" />
+          </a>
+          <a href="https://xfit.com.pl/" target="_blank" rel="noreferrer" style="display:flex; align-items:center; justify-content:center; min-height:150px; padding:24px; background:#fff; border-radius:24px; border:1px solid #e2e8f0;">
+            <img src="https://xfit.com.pl/wp-content/uploads/2021/11/cropped-logo-BIALE.png" alt="Xfit" style="max-width: 220px; max-height: 100px; width: auto; height: auto; object-fit: contain; filter: invert(1);" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Co otrzymujesz?</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">◎</div>
+          <h3>Kampanie reklamowe Meta</h3>
+          <p>Mniejszy próg wejścia i mniejsze ryzyko</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">◫</div>
+          <h3>CRM wdrożony bezpłatnie</h3>
+          <p>Profesjonalne narzędzie do zarządzania</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">◌</div>
+          <h3>System zarządzania studiem</h3>
+          <p>Wszystko w jednym miejscu</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">▢</div>
+          <h3>Proces follow-upu</h3>
+          <p>Maksymalizujemy konwersję leadów</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">↗</div>
+          <h3>15+ nowych klientów</h3>
+          <p>W ciągu 60 dni</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+          <h3>Wsparcie na każdym etapie</h3>
+          <p>Jesteśmy z Tobą przez cały proces</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-wrap">
+      <h2 class="section-title">O mnie</h2>
+      <div class="about-card">
+        <p>
+          Cześć, jestem <strong>Karol Barnaś</strong> i pomagam studiom treningu personalnego rosnąć dzięki kampaniom Meta, CRM i dobrze ustawionemu follow-upowi.
+        </p>
+        <p>
+          Większość agencji sprzedaje samo prowadzenie reklam. To za mało. Jeżeli lead wpada i nikt go nie domyka, to budżet po prostu się pali. Dlatego skupiam się nie tylko na pozyskaniu kontaktu, ale na całym procesie, który ma doprowadzić do sprzedaży.
+        </p>
+        <p>
+          Działam w modelu, w którym <strong>biorę większe ryzyko na siebie</strong> i jestem rozliczany z efektu, a nie z samego "odpaliliśmy kampanię". To ma dowozić klientów, a nie tylko raport do obejrzenia raz w miesiącu.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="kontakt">
+    <div class="container">
+      <h2 class="section-title">Gotowy na 15+ nowych klientów?</h2>
+      <p class="section-subtitle">Umów krótką konsultację i sprawdźmy, czy da się u Ciebie zbudować system, który realnie dowozi nowych klientów.</p>
+
+      <div class="cta-card">
+        <h3>Umów konsultację wstępną</h3>
+        <p>
+          Kliknij poniżej i wybierz dogodny termin. Na rozmowie przeanalizujemy Twoją obecną sytuację, zobaczymy gdzie uciekają leady i ocenimy, czy ten model współpracy ma sens właśnie u Ciebie.
+        </p>
+        <a class="btn btn-primary" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">
+          Umów konsultację
+        </a>
+        <p class="cta-link">https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="logo">
+        <span>Barnas </span><span class="logo-accent">Media</span>
+      </div>
+      <p class="footer-sub">Karol Barnaś - Marketing dla studiów treningu personalnego</p>
+      <div class="footer-contact">
+        <p>Telefon: +48 536 138 985</p>
+        <p>Email: karol@barnasmedia.biz</p>
+      </div>
+      <p class="footer-copy">© 2024 Barnas Media. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+</body>
+</html>
