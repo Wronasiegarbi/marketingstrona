@@ -1,345 +1,595 @@
-<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Barnas Media</title>
-    <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
-      body { font-family: Inter, Arial, Helvetica, sans-serif; background: #f0f7ff; color: #0b1d3a; line-height: 1.5; }
-      a { text-decoration: none; color: inherit; }
-      .container { width: min(1200px, calc(100% - 48px)); margin: 0 auto; }
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Barnas Media — Marketing for local businesses</title>
+<meta name="description" content="We help local and online businesses bring in new customers through Meta ad campaigns. Pay-for-performance — you only pay when the campaign delivers." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef3fb;
+    --bg-2:#f6f9fd;
+    --ink:#0e1f3a;
+    --ink-2:#1a2c4d;
+    --muted:#5a6b85;
+    --muted-2:#7c8aa3;
+    --line:#e3ebf5;
+    --line-2:#d6e1f0;
+    --card:#ffffff;
+    --brand:#3a8ed1;
+    --brand-dark:#2c79b5;
+    --brand-soft:#e6f1fa;
+    --teal:#3aa6b1;
+    --teal-soft:#dff1f3;
+    --teal-dark:#256d76;
+    --purple:#5b58cf;
+    --purple-soft:#e7e7fb;
+    --green:#3ea678;
+    --green-soft:#e0f3ea;
+    --amber:#d49a17;
+    --amber-soft:#fbf0d4;
+    --pink:#c95a91;
+    --pink-soft:#fbe6ef;
+    --shadow: 0 6px 24px -10px rgba(14,31,58,.18), 0 2px 6px -2px rgba(14,31,58,.08);
+    --shadow-lg: 0 24px 60px -24px rgba(14,31,58,.25), 0 6px 14px -6px rgba(14,31,58,.10);
+    --radius: 18px;
+    --radius-sm: 12px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 
-      /* ── HEADER ── */
-      .header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #c8dff7; }
-      .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; gap: 24px; }
-      .logo { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; }
-      .logo-dark { color: #0b1d3a; }
-      .logo-accent { color: #0096c7; }
+  /* ---- Header ---- */
+  header.site{
+    position:sticky;top:0;z-index:30;
+    background:rgba(255,255,255,.85);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.01em}
+  .logo span{color:var(--brand)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--brand);color:#fff;font-weight:600;font-size:15px;
+    padding:14px 22px;border-radius:14px;
+    box-shadow: 0 10px 24px -10px rgba(58,142,209,.7), 0 2px 6px -2px rgba(58,142,209,.4);
+    transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    border: 1px solid rgba(255,255,255,.15);
+    cursor:pointer;
+  }
+  .btn:hover{background:var(--brand-dark);transform:translateY(-1px)}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line-2);box-shadow:none}
+  .btn.ghost:hover{border-color:#bfd1e8;background:#fafcff}
 
-      /* ── BUTTONS ── */
-      .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 18px; font-weight: 800; transition: 0.2s ease; cursor: pointer; border: none; }
-      .btn:hover { transform: translateY(-2px); }
-      .btn-primary { background: #0096c7; color: white; box-shadow: 0 10px 24px rgba(0,150,199,0.28); }
-      .btn-secondary { background: white; color: #0b1d3a; border: 2px solid #c8dff7; }
-      .btn-top { padding: 16px 28px; font-size: 18px; }
+  /* ---- Hero ---- */
+  .hero{padding:72px 0 88px}
+  .hero-grid{display:grid;grid-template-columns: 1.05fr .95fr;gap:64px;align-items:center}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal-soft);color:var(--teal-dark);
+    font-weight:600;font-size:14px;letter-spacing:.01em;
+    padding:9px 16px;border-radius:999px;
+    border:1px solid #cfe5e8;
+  }
+  h1{
+    font-size: clamp(40px, 6vw, 68px);
+    line-height:1.02;
+    letter-spacing:-.025em;
+    margin: 22px 0 22px;
+    font-weight:800;
+  }
+  h1 em{font-style:normal;color:var(--brand)}
+  .lede{font-size:19px;color:var(--muted);max-width:560px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
 
-      /* ── HERO ── */
-      .hero { padding: 64px 0 80px; }
-      .hero-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 48px; align-items: center; }
-      .badge { display: inline-flex; background: #caf0f8; color: #005f80; padding: 14px 20px; border-radius: 999px; font-size: 20px; font-weight: 700; margin-bottom: 28px; }
-      .hero h1 { max-width: 700px; font-size: clamp(52px, 7vw, 78px); line-height: 0.95; letter-spacing: -0.05em; font-weight: 800; }
-      .hero p { max-width: 760px; margin-top: 30px; font-size: 30px; line-height: 1.5; color: #3a5a7a; }
-      .hero-actions { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
-      .hero-actions .btn { min-height: 70px; padding: 18px 30px; font-size: 26px; }
+  /* hero card */
+  .hero-card{
+    background:#fff;border-radius:24px;
+    box-shadow: var(--shadow-lg);
+    border:1px solid var(--line);
+    padding:14px;
+    position:relative;
+  }
+  .hero-card::before{
+    content:"";position:absolute;inset:-10px;
+    border-radius:32px;
+    background:linear-gradient(140deg, rgba(58,142,209,.18), rgba(91,88,207,.10) 60%, transparent);
+    z-index:-1;filter:blur(2px);
+  }
+  .feature{
+    display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:flex-start;
+    padding:18px;border-radius:16px;
+  }
+  .feature + .feature{border-top:1px solid var(--line)}
+  .ico{
+    width:56px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--brand-soft);color:var(--brand);
+  }
+  .ico.green{background:var(--green-soft);color:var(--green)}
+  .ico.amber{background:var(--amber-soft);color:var(--amber)}
+  .ico.purple{background:var(--purple-soft);color:var(--purple)}
+  .ico.teal{background:var(--teal-soft);color:var(--teal-dark)}
+  .ico.pink{background:var(--pink-soft);color:var(--pink)}
+  .feature h3{margin:0 0 4px;font-size:18px;letter-spacing:-.01em}
+  .feature p{margin:0;color:var(--muted);font-size:15px}
 
-      /* hero card */
-      .hero-card-wrap { background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%); border-radius: 30px; padding: 28px; box-shadow: 0 30px 60px rgba(0,100,180,0.22); }
-      .hero-card { background: white; border-radius: 24px; padding: 36px; }
-      .hero-card-item { display: flex; align-items: flex-start; gap: 18px; }
-      .hero-card-item + .hero-card-item { margin-top: 28px; }
-      .icon-box { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; flex-shrink: 0; }
-      .green  { background: #dcfce7; color: #15803d; }
-      .blue   { background: #dbeafe; color: #1d4ed8; }
-      .purple { background: #f3e8ff; color: #7e22ce; }
-      .hero-card-title { font-size: 32px; font-weight: 800; color: #0b1d3a; }
-      .hero-card-desc  { margin-top: 2px; font-size: 24px; color: #64748b; }
+  /* section common */
+  section{padding:96px 0}
+  .section-head{text-align:center;max-width:760px;margin:0 auto 56px}
+  .section-head h2{
+    font-size: clamp(34px, 4.4vw, 52px);
+    letter-spacing:-.02em;
+    margin:0 0 16px;font-weight:800;
+  }
+  .section-head p{color:var(--muted);font-size:18px;margin:0}
 
-      /* ── SECTIONS ── */
-      .section-light { border-top: 1px solid #c8dff7; background: #e8f4fd; padding: 96px 0; }
-      .section { padding: 96px 0; }
-      .section-title { text-align: center; font-size: clamp(42px, 5vw, 72px); line-height: 1.05; font-weight: 800; letter-spacing: -0.04em; }
-      .section-subtitle { max-width: 760px; margin: 18px auto 0; text-align: center; font-size: 30px; color: #3a5a7a; }
+  /* ---- Process ---- */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .step{
+    background:#fff;border-radius:var(--radius);
+    border:1px solid var(--line);
+    padding:28px;position:relative;
+    box-shadow: var(--shadow);
+  }
+  .step .num{
+    width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:700;font-size:18px;letter-spacing:-.01em;margin-bottom:22px;
+    background:var(--brand);
+  }
+  .step:nth-child(2) .num{background:var(--teal)}
+  .step:nth-child(3) .num{background:var(--teal-dark)}
+  .step:nth-child(4) .num{background:var(--purple)}
+  .step:nth-child(2){border-color:#cfe6e9}
+  .step:nth-child(3){border-color:#bcd4d7}
+  .step:nth-child(4){border-color:#d8d6f3}
+  .step h3{font-size:20px;margin:0 0 10px;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--muted);font-size:15px}
 
-      /* ── STEPS ── */
-      .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 60px; }
-      .step-card { border-radius: 28px; border: 1px solid; padding: 34px; }
-      .step-1 { border-color: #93c5fd; background: rgba(219,234,254,0.45); }
-      .step-2 { border-color: #67e8f9; background: rgba(207,250,254,0.45); }
-      .step-3 { border-color: #a5f3fc; background: rgba(224,253,254,0.4); }
-      .step-4 { border-color: #818cf8; background: rgba(238,242,255,0.45); }
-      .step-number { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; color: white; font-size: 34px; font-weight: 800; }
-      .step-card h3 { margin-top: 28px; font-size: 34px; font-weight: 800; line-height: 1.15; }
-      .step-card p  { margin-top: 18px; font-size: 26px; line-height: 1.55; color: #3a5a7a; }
-      .blue1-bg   { background: #2563eb; }
-      .blue2-bg   { background: #0891b2; }
-      .teal-bg    { background: #0e7490; }
-      .indigo-bg  { background: #4338ca; }
+  /* ---- For whom ---- */
+  .who{padding:96px 0;background:linear-gradient(180deg, var(--bg) 0%, #f3f7fc 100%)}
+  .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .who-card{
+    background:#fff;border-radius:var(--radius);border:1px solid var(--line);
+    padding:34px;box-shadow:var(--shadow);
+  }
+  .who-card h3{
+    margin:0 0 18px;font-size:22px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:12px;
+  }
+  .badge{
+    width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  }
+  .badge.yes{background:var(--green-soft);color:var(--green)}
+  .badge.no{background:#fde6e6;color:#c5443f}
+  .who-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+  .who-list li{display:grid;grid-template-columns:24px 1fr;gap:12px;color:var(--muted);font-size:15.5px;line-height:1.55}
+  .who-list li .mark{margin-top:2px}
 
-      /* ── FEATURES ── */
-      .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
-      .feature-card { background: white; border: 1px solid #c8dff7; border-radius: 28px; padding: 30px; box-shadow: 0 8px 24px rgba(0,70,140,0.07); }
-      .feature-icon { font-size: 48px; font-weight: 800; color: #0096c7; line-height: 1; }
-      .feature-card h3 { margin-top: 24px; font-size: 32px; font-weight: 800; line-height: 1.15; }
-      .feature-card p  { margin-top: 14px; font-size: 24px; color: #64748b; line-height: 1.5; }
+  /* ---- Deliverables ---- */
+  .deliver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .item{
+    background:#fff;border-radius:var(--radius);border:1px solid var(--line);
+    padding:30px;box-shadow:var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .item .ico{margin-bottom:22px}
+  .item h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em}
+  .item p{margin:0;color:var(--muted);font-size:15px}
 
-      /* ── ABOUT ── */
-      .about-wrap { max-width: 960px; margin: 0 auto; }
-      .about-card { margin-top: 42px; background: white; border: 1px solid #c8dff7; border-radius: 28px; padding: 42px; box-shadow: 0 8px 24px rgba(0,70,140,0.06); }
-      .about-card p { font-size: 28px; line-height: 1.8; color: #3a5a7a; }
-      .about-card p + p { margin-top: 26px; }
-      .about-card strong { color: #0b1d3a; }
+  /* ---- About ---- */
+  .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+  .portrait{
+    aspect-ratio: 4/5;
+    border-radius:24px;
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(58,142,209,.18), transparent 60%),
+      radial-gradient(120% 80% at 100% 100%, rgba(91,88,207,.16), transparent 60%),
+      linear-gradient(160deg,#e9f1fa, #f5f0ff);
+    border:1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;
+  }
+  .portrait img.photo{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 18%;
+    display:block;
+  }
+  .portrait .name{
+    position:relative;padding:22px 26px;
+    background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.92) 60%);
+    width:100%;
+    color:var(--ink);
+  }
+  .portrait .name strong{display:block;font-size:18px}
+  .portrait .name span{color:var(--muted);font-size:14px}
+  .about h2{font-size:clamp(32px,4vw,44px);letter-spacing:-.02em;margin:0 0 22px}
+  .about p{color:var(--muted);font-size:16.5px;margin:0 0 16px}
 
-      /* ── TRUST ── */
-      .trust-wrap { background: white; border: 1px solid #c8dff7; border-radius: 28px; padding: 44px 36px; text-align: center; box-shadow: 0 8px 24px rgba(0,70,140,0.05); }
-      .trust-label { font-size: 18px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 800; color: #0096c7; }
-      .trust-grid { margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; align-items: stretch; }
-      .trust-item { display: flex; align-items: center; justify-content: center; min-height: 150px; padding: 24px; background: #fff; border-radius: 24px; border: 1px solid #c8dff7; }
-      .trust-item img { max-width: 220px; max-height: 100px; width: auto; height: auto; object-fit: contain; }
+  /* ---- CTA ---- */
+  .cta{
+    padding:96px 0;
+    background:
+      radial-gradient(80% 100% at 50% 0%, rgba(58,142,209,.18), transparent 70%),
+      linear-gradient(180deg, #f3f7fc, var(--bg));
+  }
+  .cta-card{
+    background: linear-gradient(160deg, #0e1f3a 0%, #1a2c4d 100%);
+    color:#fff;border-radius:28px;padding:64px;
+    box-shadow: 0 30px 80px -30px rgba(14,31,58,.55);
+    display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .cta-card::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(40% 60% at 90% 10%, rgba(58,142,209,.35), transparent 60%),
+      radial-gradient(35% 50% at 10% 90%, rgba(91,88,207,.30), transparent 60%);
+    pointer-events:none;
+  }
+  .cta-card h2{font-size:clamp(30px,3.4vw,40px);letter-spacing:-.02em;margin:0 0 14px;line-height:1.1;position:relative}
+  .cta-card p{color:#cad6e8;margin:0 0 26px;font-size:16.5px;position:relative}
+  .cta-card .btn{background:#fff;color:var(--ink);box-shadow:none;border:0;position:relative}
+  .cta-card .btn:hover{background:#eaf3fc}
+  .booking{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:24px}
+  .booking h4{margin:0 0 8px;font-size:16px;letter-spacing:.02em;color:#cad6e8;font-weight:600;text-transform:uppercase}
+  .booking p{color:#dfe8f3;margin:0 0 18px;font-size:15.5px}
 
-      /* ── CTA ── */
-      .cta-section { margin-top: 24px; background: linear-gradient(135deg, #0077b6 0%, #023e8a 100%); padding: 96px 0; }
-      .cta-section .section-title { color: white; }
-      .cta-section .section-subtitle { color: #ade8f4; max-width: 900px; }
-      .cta-card { max-width: 960px; margin: 56px auto 0; background: white; border-radius: 28px; padding: 44px; text-align: center; box-shadow: 0 28px 60px rgba(0,0,0,0.16); }
-      .cta-card h3 { font-size: 44px; font-weight: 800; letter-spacing: -0.03em; }
-      .cta-card p  { margin-top: 20px; font-size: 28px; line-height: 1.6; color: #475569; }
-      .cta-card .btn { margin-top: 30px; min-height: 76px; padding: 18px 34px; font-size: 28px; }
-      .cta-link { margin-top: 20px; font-size: 18px; color: #64748b; word-break: break-all; }
+  /* ---- Footer ---- */
+  footer.site{background:#0a172d;color:#a8b6cf;padding:48px 0 36px}
+  .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;align-items:start}
+  footer .logo{color:#fff;margin-bottom:8px}
+  footer .logo span{color:var(--brand)}
+  footer p{margin:0;font-size:14.5px;line-height:1.7}
+  footer h5{margin:0 0 10px;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+  footer a:hover{color:#fff}
+  .legal{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);font-size:13px;color:#7e8caa}
 
-      /* ── FOOTER ── */
-      .footer { background: #021526; color: white; text-align: center; padding: 64px 0; }
-      .footer-sub     { margin-top: 24px; font-size: 28px; color: #93c5fd; }
-      .footer-contact { margin-top: 28px; display: grid; gap: 10px; font-size: 24px; color: #93c5fd; }
-      .footer-copy    { margin-top: 20px; font-size: 20px; color: #475569; }
+  /* ---- Responsive ---- */
+  @media (max-width: 980px){
+    .hero{padding:48px 0 64px}
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .process{grid-template-columns:repeat(2,1fr)}
+    .deliver-grid{grid-template-columns:repeat(2,1fr)}
+    .who-grid{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr;gap:36px}
+    .cta-card{grid-template-columns:1fr;padding:36px}
+    .foot{grid-template-columns:1fr 1fr;gap:24px}
+    section{padding:72px 0}
+  }
+  @media (max-width: 600px){
+    .site-inner{height:68px}
+    .btn{padding:12px 16px;font-size:14px}
+    .hero{padding:32px 0 48px}
+    .process{grid-template-columns:1fr}
+    .deliver-grid{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr}
+    .who-card{padding:26px}
+    .item{padding:24px}
+    .cta-card{padding:28px}
+  }
+</style>
+</head>
+<body>
 
-      /* ── RESPONSIVE ── */
-      @media (max-width: 1100px) {
-        .hero-grid, .steps-grid, .features-grid, .trust-grid { grid-template-columns: 1fr 1fr; }
-      }
-      @media (max-width: 760px) {
-        .container { width: min(100% - 32px, 1200px); }
-        .header-inner, .hero-grid, .steps-grid, .features-grid, .trust-grid { grid-template-columns: 1fr; }
-        .header-inner { align-items: flex-start; flex-direction: column; }
-        .logo { font-size: 28px; }
-        .badge { font-size: 16px; padding: 10px 16px; }
-        .hero p, .section-subtitle, .step-card p, .feature-card p, .about-card p, .cta-card p, .footer-sub, .footer-contact { font-size: 20px; }
-        .hero-actions .btn, .cta-card .btn { width: 100%; font-size: 22px; }
-        .hero-card-title, .feature-card h3, .step-card h3, .cta-card h3 { font-size: 28px; }
-        .hero-card-desc { font-size: 20px; }
-        .section, .section-light, .cta-section { padding: 72px 0; }
-      }
-    </style>
-  </head>
-  <body>
+<!-- ============ Reusable SVG icons ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <!-- Common style for all line icons -->
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="12" r="5"/>
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.5 2.5 4 13.5h6L9.5 21.5 20 10.5h-6l-.5-8z"/>
+    </symbol>
+    <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5.5" rx="8" ry="3"/>
+      <path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>
+      <path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>
+    </symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11v2a2 2 0 0 0 2 2h2l8 4V5L7 9H5a2 2 0 0 0-2 2z"/>
+      <path d="M18 8a5 5 0 0 1 0 8"/>
+      <path d="M9 15v4"/>
+    </symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19.4 13.5a7.5 7.5 0 0 0 0-3l2-1.5-2-3.4-2.4.7a7.6 7.6 0 0 0-2.6-1.5L14 2h-4l-.4 2.8a7.6 7.6 0 0 0-2.6 1.5l-2.4-.7-2 3.4 2 1.5a7.5 7.5 0 0 0 0 3l-2 1.5 2 3.4 2.4-.7a7.6 7.6 0 0 0 2.6 1.5L10 22h4l.4-2.8a7.6 7.6 0 0 0 2.6-1.5l2.4.7 2-3.4-2-1.5z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="7" rx="2"/>
+      <rect x="3" y="13" width="18" height="7" rx="2"/>
+      <path d="M7 7.5h.01M7 16.5h.01"/>
+      <path d="M11 7.5h6M11 16.5h6"/>
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-3l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>
+      <path d="M8 10h6M8 13h4"/>
+    </symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 17l6-6 4 4 8-9"/>
+      <path d="M14 6h7v7"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M8 12.5l2.5 2.5L16 9.5"/>
+    </symbol>
+    <symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9 9l6 6M15 9l-6 6"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="i-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12.5l4 4 10-10"/>
+    </symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 6l12 12M18 6l-6 6-6 6" />
+    </symbol>
+    <symbol id="i-portrait-glyph" viewBox="0 0 200 240" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="100" cy="92" r="42"/>
+      <path d="M30 220c10-38 38-60 70-60s60 22 70 60"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2"/>
+      <path d="M3 7l9 6 9-6"/>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
+    </symbol>
+  </defs>
+</svg>
 
-    <!-- HEADER -->
-    <header class="header">
-      <div class="container header-inner">
-        <div class="logo">
-          <span class="logo-dark">Barnas </span><span class="logo-accent">Media</span>
+<!-- ============ Header ============ -->
+<header class="site">
+  <div class="wrap site-inner">
+    <a class="logo" href="#top">Barnas <span>Media</span></a>
+    <a class="btn" href="#contact">Book a consultation
+      <svg width="16" height="16"><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ============ Hero ============ -->
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill">
+        <svg width="14" height="14"><use href="#i-spark"/></svg>
+        Marketing for local businesses
+      </div>
+      <h1>You only pay <em>for results</em></h1>
+      <p class="lede">We help local and online businesses bring in new customers through Meta ad campaigns. We get paid on outcomes — not hours and reports. Production and management costs sit on our side, so your risk stays minimal.</p>
+      <div class="cta-row">
+        <a class="btn" href="#process">See how it works
+          <svg width="16" height="16"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="btn ghost" href="#contact">Free consultation</a>
+      </div>
+    </div>
+
+    <aside class="hero-card" aria-label="Key benefits">
+      <div class="feature">
+        <div class="ico green"><svg width="26" height="26"><use href="#i-check-circle"/></svg></div>
+        <div>
+          <h3>Pay-for-performance</h3>
+          <p>You pay when the campaign actually delivers customers.</p>
         </div>
-        <a class="btn btn-primary btn-top" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">
-          Umów konsultację
+      </div>
+      <div class="feature">
+        <div class="ico amber"><svg width="26" height="26"><use href="#i-bolt"/></svg></div>
+        <div>
+          <h3>Production &amp; management included</h3>
+          <p>Those costs are on us — no hidden fees.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="ico purple"><svg width="26" height="26"><use href="#i-database"/></svg></div>
+        <div>
+          <h3>CRM + lead system</h3>
+          <p>Set up for free, ready from day one.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ Process ============ -->
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>We don't just sell ads. We build the whole mechanism for acquiring and closing customers — and we get paid on the result.</p>
+    </div>
+    <div class="process">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Meta campaigns</h3>
+        <p>We run Meta campaigns built for real outcomes — leads you can actually close. No empty reach or likes.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>CRM system</h3>
+        <p>We set up a CRM for free and organize lead handling, so no opportunity gets lost after the first message.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Follow-up</h3>
+        <p>We design follow-up flows, contact scripts and operating logic so more people who leave their details actually buy.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Result = payment</h3>
+        <p>We earn when you earn. The goal is more customers — not reports and dashboards you skim once a month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Who is this for ============ -->
+<section class="who">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Who this is for</h2>
+      <p>This partnership only makes sense if your business actually wants to grow — not just "try out some ads."</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3><span class="badge yes"><svg width="18" height="18"><use href="#i-mark"/></svg></span> This is for you if</h3>
+        <ul class="who-list">
+          <li><span class="mark"><svg width="20" height="20" style="color:var(--green)"><use href="#i-mark"/></svg></span><span>You run a local business or an online company and want a steady flow of new customers — not sporadic activity.</span></li>
+          <li><span class="mark"><svg width="20" height="20" style="color:var(--green)"><use href="#i-mark"/></svg></span><span>You've run ads before, but the leads were weak or nobody closed them, and the budget burned out.</span></li>
+          <li><span class="mark"><svg width="20" height="20" style="color:var(--green)"><use href="#i-mark"/></svg></span><span>You want order in how you handle leads — instead of chaos across Messenger, phone calls and sticky notes.</span></li>
+          <li><span class="mark"><svg width="20" height="20" style="color:var(--green)"><use href="#i-mark"/></svg></span><span>You care about real business results, not just being present on social media.</span></li>
+        </ul>
+      </div>
+      <div class="who-card">
+        <h3><span class="badge no"><svg width="18" height="18"><use href="#i-cross"/></svg></span> This is not for you if</h3>
+        <ul class="who-list">
+          <li><span class="mark"><svg width="20" height="20" style="color:#c5443f"><use href="#i-cross"/></svg></span><span>You're hoping ads alone will fix a weak offer and poor sales.</span></li>
+          <li><span class="mark"><svg width="20" height="20" style="color:#c5443f"><use href="#i-cross"/></svg></span><span>You don't pick up the phone, don't reply to leads, and won't put a process in place.</span></li>
+          <li><span class="mark"><svg width="20" height="20" style="color:#c5443f"><use href="#i-cross"/></svg></span><span>You're shopping on price alone — instead of a model that actually delivers outcomes.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Deliverables ============ -->
+<section id="deliver">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What you get</h2>
+      <p>A complete package — from the ad to the closed sale.</p>
+    </div>
+    <div class="deliver-grid">
+      <div class="item">
+        <div class="ico"><svg width="28" height="28"><use href="#i-megaphone"/></svg></div>
+        <h3>Meta ad campaigns</h3>
+        <p>Pay for results, not for time and presence.</p>
+      </div>
+      <div class="item">
+        <div class="ico teal"><svg width="28" height="28"><use href="#i-gear"/></svg></div>
+        <h3>Production &amp; management</h3>
+        <p>Costs sit on our side. No hidden fees.</p>
+      </div>
+      <div class="item">
+        <div class="ico purple"><svg width="28" height="28"><use href="#i-server"/></svg></div>
+        <h3>Free CRM setup</h3>
+        <p>A professional tool for managing your leads.</p>
+      </div>
+      <div class="item">
+        <div class="ico amber"><svg width="28" height="28"><use href="#i-chat"/></svg></div>
+        <h3>Follow-up process</h3>
+        <p>We maximize conversion on every lead.</p>
+      </div>
+      <div class="item">
+        <div class="ico green"><svg width="28" height="28"><use href="#i-trend"/></svg></div>
+        <h3>New customers in 60 days</h3>
+        <p>A measurable result — not an empty promise.</p>
+      </div>
+      <div class="item">
+        <div class="ico pink"><svg width="28" height="28"><use href="#i-shield"/></svg></div>
+        <h3>Support at every stage</h3>
+        <p>We stay with you — we don't disappear once the campaign goes live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ About ============ -->
+<section class="about">
+  <div class="wrap about-grid">
+    <div class="portrait">
+      <img class="photo" src="https://i.imgur.com/i1McV4R.png" alt="Karol Barnaś" loading="lazy" />
+      <div class="name">
+        <strong>Karol Barnaś</strong>
+        <span>Founder · Barnas Media</span>
+      </div>
+    </div>
+    <div>
+      <div class="pill" style="margin-bottom:18px">About me</div>
+      <h2>I focus on the whole sales motion — not just ads</h2>
+      <p>Hi, I'm Karol Barnaś. I help local and online businesses acquire new customers through Meta campaigns, a proper CRM, and a well-tuned follow-up process.</p>
+      <p>Most agencies sell ad management and bill by the hour. That's not enough. If a lead comes in and nobody closes it, the budget simply burns. So I focus not only on generating contacts, but on the entire process that turns them into sales.</p>
+      <p>I work on a pay-for-performance model and cover production and campaign management costs on my side. I'm invested in your growth — that's the only way the partnership makes sense for both of us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-card">
+      <div>
+        <h2>Ready for new customers?</h2>
+        <p>Book a short consultation and let's see whether we can build a system that actually delivers at your company. You only pay for what works.</p>
+        <a class="btn" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noopener">Book an intro consultation
+          <svg width="16" height="16"><use href="#i-arrow"/></svg>
         </a>
       </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="badge">Marketing dla lokalnych biznesów</div>
-          <h1>Płacisz tylko za&nbsp;wyniki</h1>
-          <p>
-            Pomagamy lokalnym firmom i biznesom online pozyskiwać nowych klientów dzięki kampaniom Meta. Rozliczamy się z&nbsp;efektów, nie z&nbsp;godzin i&nbsp;raportów. Pokrywamy koszty produkcji i&nbsp;zarządzania kampanią, żeby Twoje ryzyko było minimalne.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#jak-to-dziala">Zobacz jak to działa</a>
-            <a class="btn btn-secondary" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">Bezpłatna konsultacja</a>
-          </div>
-        </div>
-        <div class="hero-card-wrap">
-          <div class="hero-card">
-            <div class="hero-card-item">
-              <div class="icon-box green">✓</div>
-              <div>
-                <div class="hero-card-title">Rozliczenie za wyniki</div>
-                <div class="hero-card-desc">Płacisz, gdy kampania dowozi klientów</div>
-              </div>
-            </div>
-            <div class="hero-card-item">
-              <div class="icon-box blue">⚡</div>
-              <div>
-                <div class="hero-card-title">Produkcja i zarządzanie w cenie</div>
-                <div class="hero-card-desc">Pokrywamy te koszty po naszej stronie</div>
-              </div>
-            </div>
-            <div class="hero-card-item">
-              <div class="icon-box purple">▥</div>
-              <div>
-                <div class="hero-card-title">CRM + system leadów</div>
-                <div class="hero-card-desc">Wdrożenie całkowicie bezpłatne</div>
-              </div>
-            </div>
-          </div>
+      <div class="booking">
+        <h4>What we'll cover</h4>
+        <p>We'll review your current situation, see where leads are slipping through the cracks, and decide whether this model is a fit for you.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;color:#dfe8f3;font-size:15px">
+          <span style="display:flex;align-items:center;gap:10px"><svg width="18" height="18" style="color:#9bbce0"><use href="#i-phone"/></svg> +48 536 138 985</span>
+          <span style="display:flex;align-items:center;gap:10px"><svg width="18" height="18" style="color:#9bbce0"><use href="#i-mail"/></svg> karol@barnasmedia.biz</span>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+</main>
 
-    <!-- JAK TO DZIAŁA -->
-    <section id="jak-to-dziala" class="section-light">
-      <div class="container">
-        <h2 class="section-title">Jak to działa?</h2>
-        <p class="section-subtitle">Nie sprzedajemy samych reklam. Budujemy cały mechanizm pozyskiwania i domykania klientów. I rozliczamy się z rezultatu.</p>
-        <div class="steps-grid">
-          <div class="step-card step-1">
-            <div class="step-number blue1-bg">1</div>
-            <h3>Kampanie Meta</h3>
-            <p>Uruchamiamy kampanie Meta nastawione na realny wynik: leady, które da się zamknąć sprzedażowo. Nie puste zasięgi i polubienia.</p>
-          </div>
-          <div class="step-card step-2">
-            <div class="step-number blue2-bg">2</div>
-            <h3>System CRM</h3>
-            <p>Wdrażamy bezpłatnie CRM i porządkujemy obsługę leadów, żeby żadna szansa sprzedażowa nie ginęła po pierwszej wiadomości.</p>
-          </div>
-          <div class="step-card step-3">
-            <div class="step-number teal-bg">3</div>
-            <h3>Follow-up</h3>
-            <p>Układamy follow-up, skrypty kontaktu i logikę działania, żeby więcej osób, które zostawiły dane, faktycznie kupiło.</p>
-          </div>
-          <div class="step-card step-4">
-            <div class="step-number indigo-bg">4</div>
-            <h3>Wynik = rozliczenie</h3>
-            <p>Zarabiamy, gdy Ty zarabiasz. Celem jest wzrost liczby klientów, nie raporty i tabelki do obejrzenia raz w miesiącu.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- ============ Footer ============ -->
+<footer class="site">
+  <div class="wrap foot">
+    <div>
+      <div class="logo">Barnas <span>Media</span></div>
+      <p>Karol Barnaś · Marketing for local businesses.<br/>We get paid on outcomes — leads, customers, growth.</p>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <p>
+        <a href="tel:+48536138985">+48 536 138 985</a><br/>
+        <a href="mailto:karol@barnasmedia.biz">karol@barnasmedia.biz</a>
+      </p>
+    </div>
+    <div>
+      <h5>Get started</h5>
+      <p><a href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noopener">Book an intro consultation →</a></p>
+    </div>
+  </div>
+  <div class="wrap legal">© 2024 Barnas Media. All rights reserved.</div>
+</footer>
 
-    <!-- DLA KOGO -->
-    <section class="section-light">
-      <div class="container about-wrap">
-        <h2 class="section-title">Dla kogo to jest?</h2>
-        <p class="section-subtitle">Ta współpraca ma sens tylko wtedy, gdy Twój biznes naprawdę chce rosnąć, a nie tylko "spróbować reklam".</p>
-        <div class="about-card">
-          <p><strong>To jest dla Ciebie, jeśli:</strong></p>
-          <p>Prowadzisz lokalny biznes lub firmę online i chcesz regularnie pozyskiwać nowych klientów, a nie działać z doskoku. Miałeś już reklamy, ale leady były słabe albo nikt ich sensownie nie domykał i budżet się palił. Chcesz mieć porządek w kontakcie z leadami, zamiast chaosu na Messengerze, telefonie i kartkach. Zależy Ci na realnym wyniku biznesowym, a nie na samej obecności w social mediach.</p>
-          <p><strong>To nie jest dla Ciebie, jeśli:</strong></p>
-          <p>Liczysz, że same reklamy naprawią słabą ofertę i brak sprzedaży. Nie odbierasz telefonów, nie odpisujesz leadom i nie chcesz wdrożyć żadnego procesu. Szukasz najtańszej usługi, a nie modelu, który ma faktycznie dowieźć wynik.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ZAUFALI MI -->
-    <section class="section">
-      <div class="container">
-        <div class="trust-wrap">
-          <p class="trust-label">Zaufali mi</p>
-          <div class="trust-grid">
-            <a href="https://gym-center.pl/" target="_blank" rel="noreferrer" class="trust-item">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrFXTw4LC2WHMci70lBM2vEXnwFlovzHiXtA&s" alt="Gym Center" />
-            </a>
-            <a href="https://www.strefaruchuprzemysl.com/" target="_blank" rel="noreferrer" class="trust-item">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0P2LW2lPv2XLm8pSalUc8NaBOJUJGLTsSeA&s" alt="Strefa Ruchu" />
-            </a>
-            <a href="https://www.akademiaruchu-krakow.com.pl/" target="_blank" rel="noreferrer" class="trust-item">
-              <img src="https://akademiaruchu-krakow.com.pl/Logo.svg" alt="Akademia Ruchu" />
-            </a>
-            <a href="https://xfit.com.pl/" target="_blank" rel="noreferrer" class="trust-item">
-              <img src="https://xfit.com.pl/wp-content/uploads/2021/11/cropped-logo-BIALE.png" alt="Xfit" style="filter: invert(1);" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CO OTRZYMUJESZ -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Co otrzymujesz?</h2>
-        <p class="section-subtitle">Kompleksowy pakiet: od reklamy po zamkniętą sprzedaż.</p>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">◎</div>
-            <h3>Kampanie reklamowe Meta</h3>
-            <p>Płacisz za wyniki, nie za czas i obecność</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">◫</div>
-            <h3>Produkcja i zarządzanie kampanią</h3>
-            <p>Koszty po naszej stronie, żadnych ukrytych opłat</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">◌</div>
-            <h3>CRM wdrożony bezpłatnie</h3>
-            <p>Profesjonalne narzędzie do zarządzania leadami</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">▢</div>
-            <h3>Proces follow-upu</h3>
-            <p>Maksymalizujemy konwersję każdego leada</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">↗</div>
-            <h3>Nowi klienci w 60 dni</h3>
-            <p>Mierzalny wynik, nie obietnica bez pokrycia</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">✓</div>
-            <h3>Wsparcie na każdym etapie</h3>
-            <p>Jesteśmy z Tobą przez cały proces. Nie znikamy po odpaleniu kampanii.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- O MNIE -->
-    <section class="section">
-      <div class="container about-wrap">
-        <h2 class="section-title">O mnie</h2>
-        <div class="about-card">
-          <img
-            src="https://i.imgur.com/i1McV4R.png"
-            alt="Karol Barnaś"
-            style="width:180px; height:180px; object-fit:cover; border-radius:999px; display:block; margin:0 auto 28px; box-shadow:0 10px 30px rgba(0,70,140,0.15);"
-          />
-          <p>
-            Cześć, jestem <strong>Karol Barnaś</strong> i pomagam lokalnym firmom i biznesom online pozyskiwać nowych klientów dzięki kampaniom Meta, systemowi CRM i dobrze ustawionemu follow-upowi.
-          </p>
-          <p>
-            Większość agencji sprzedaje samo prowadzenie reklam i rozlicza się z godzin. To za mało. Jeżeli lead wpada i nikt go nie domyka, budżet po prostu się pali. Dlatego skupiam się nie tylko na pozyskaniu kontaktu, ale na całym procesie, który doprowadza do sprzedaży.
-          </p>
-          <p>
-            Działam w modelu <strong>rozliczenia za wyniki</strong>. Pokrywam koszty produkcji i zarządzania kampanią po swojej stronie. Zależy mi na Twoim wzroście, bo tylko wtedy nasza współpraca ma sens dla obu stron.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section" id="kontakt">
-      <div class="container">
-        <h2 class="section-title">Gotowy na nowych klientów?</h2>
-        <p class="section-subtitle">Umów krótką konsultację i sprawdźmy, czy da się u Ciebie zbudować system, który realnie dowozi wyniki. Płacisz tylko za efekt.</p>
-        <div class="cta-card">
-          <h3>Umów konsultację wstępną</h3>
-          <p>
-            Kliknij poniżej i wybierz dogodny termin. Na rozmowie przeanalizujemy Twoją obecną sytuację, zobaczymy gdzie uciekają leady i ocenimy, czy ten model współpracy ma sens właśnie u Ciebie.
-          </p>
-          <a class="btn btn-primary" href="https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna" target="_blank" rel="noreferrer">
-            Umów konsultację
-          </a>
-          <p class="cta-link">https://cal.com/karol-barnas-qxvgke/konsultacja-wstepna</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="container">
-        <div class="logo">
-          <span>Barnas </span><span class="logo-accent">Media</span>
-        </div>
-        <p class="footer-sub">Karol Barnaś · Marketing dla lokalnych biznesów</p>
-        <div class="footer-contact">
-          <p>Telefon: +48 536 138 985</p>
-          <p>Email: karol@barnasmedia.biz</p>
-        </div>
-        <p class="footer-copy">© 2024 Barnas Media. Wszelkie prawa zastrzeżone.</p>
-      </div>
-    </footer>
-
-  </body>
+</body>
 </html>
